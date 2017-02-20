@@ -1,0 +1,28 @@
+<view class="container">
+<!--//一定要加上postData调用代表一个子元素-->
+  <image class="head-image" src="{{isPlayingMusic?postData.music.coverImg:postData.headImgSrc}}">
+  </image>
+  <image catchtap="onMusicTap" class="audio" src="{{isPlayingMusic?'../../../images/music-stop.png':'../../../images/music-start.png'}}">
+  </image>
+  <view class="auther-date">
+    <image class="avatar" src="{{postData.avatar}}"></image>
+    <text class="auther">{{postData.auther}}</text>
+    <text class="const-text">发表于</text>
+    <text class="date">{{postData.dateTime}}</text>
+  </view>
+  <text class="title">{{postData.title}}</text>
+  <view class="tool">
+    <view class="circle-img">
+      <image wx:if="{{collected}}" catchtap="onCollectionTap" src="../../../images/collection.png">
+      </image>
+      <image wx:else  catchtap="onCollectionTap" src="../../../images/collection-anti.png">
+      </image>
+      <image catchtap="onShareTap" class="share-img" src="../../../images/share.png">
+      </image>
+    </view>
+    <view class="horizon"></view>
+  </view>
+  <text class="detail">
+    {{postData.detail}}
+  </text>
+</view>
