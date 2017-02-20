@@ -1,14 +1,14 @@
 <import src="post-item/post-item-template.wxml" />
 <view>
-    <swiper indicator-dots="true" autoplay="true" interval="2000">
+    <swiper catchtap="onSwiperTap" indicator-dots="true" autoplay="true" interval="2000">
         <swiper-item>
-            <image src="../../images/rain.png"></image>
+            <image  src="../../images/rain.png" data-postId="{{2}}"></image>
         </swiper-item>
         <swiper-item>
-            <image src="../../images/tired.png"></image>
+            <image src="../../images/tired.png" data-postId="{{3}}"></image>
         </swiper-item>
         <swiper-item>
-            <image src="../../images/umbrella.png"></image>
+            <image src="../../images/umbrella.png" data-postId="{{4}}"></image>
         </swiper-item>
     </swiper>
 

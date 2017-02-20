@@ -22,6 +22,15 @@ Page({
   },
 
 
+  onSwiperTap: function(event){
+    //当前点击的图片
+    var postId = event.target.dataset.postid;
+
+    wx.navigateTo({
+      url: 'post-detail/post-detail?id=' + postId
+    })
+  },
+
   onShareAppMessage: function() {
     // 用户点击右上角分享
     return {
