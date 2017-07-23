@@ -1,0 +1,8 @@
+<import src="../stars/stars-template.wxml" />
+<template name="movieTemplate">
+  <view class="movie-container">
+    <image class="movie-img" src="/images/nanshen.jpeg"></image>
+    <text class="movie-title">我的前半生</text>
+    <template is="starsTemplate" />
+  </view>
+</template>
