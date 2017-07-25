@@ -30,6 +30,10 @@ Page({
     util.http(dataUrl, this.processDoubanData);
   },
 
+  onScrollLower: function(event){
+   
+  },
+
   processDoubanData: function (moviesDouban){
     var movies = [];
     for (var idx in moviesDouban.subjects) {
