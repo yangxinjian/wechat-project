@@ -4,7 +4,7 @@
     <view class="movie-list-container">
       <view class="movie-head">
         <text class="slogan">{{categoryTitle}}</text>
-        <view class="more">
+        <view catchtap="onMoreTap" data-category="{{categoryTitle}}" class="more">
           <text class="more-text">更多</text>
           <image class="more-img" src="/images/arrow-right.png"></image>
         </view>

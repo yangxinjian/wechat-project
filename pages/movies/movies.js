@@ -11,17 +11,24 @@ Page({
     top250:{}
   },
 
+  onMoreTap: function(event){//"更多"跳转方法
+    var category = event.currentTarget.dataset.category;//获取点击的“更多”，代表哪儿一个分类
+    wx.navigateTo({//跳转子页面
+      url: 'more-movie/more-movie?category=' + category,
+    })
+  },
+
   onLoad: function(event){
-    var inTheatersUrl = app.globalData.doubanBase + "/v2/movie/in_theaters" + "?start=0&count=3";
-    var comingSoonUrl = app.globalData.doubanBase + "/v2/movie/coming_soon" + "?start=0&count=3";
-    var top250Url = app.globalData.doubanBase + "/v2/movie/top250" + "?start=0&count=3";
+    var inTheatersUrl = app.globalData.doubanBase + "/v2/movie/in_theaters" + "?start=0&count=3";//获取正在热映的api
+    var comingSoonUrl = app.globalData.doubanBase + "/v2/movie/coming_soon" + "?start=0&count=3";//获取即将上映的api
+    var top250Url = app.globalData.doubanBase + "/v2/movie/top250" + "?start=0&count=3";//获取top250的api
   
     this.getMovieListData(inTheatersUrl , "inTheaters" , "正在热映");
     this.getMovieListData(comingSoonUrl , "comingSoon" , "即将上映");
     this.getMovieListData(top250Url , "top250" , "豆瓣top250");
   },
 
-  getMovieListData: function(url , settedKey , categoryTitle){
+  getMovieListData: function(url , settedKey , categoryTitle){//获取api下的data数据
     var that = this;
     wx.request({
       url: url,
@@ -30,7 +37,6 @@ Page({
         "Content-Type" : "application/xml"
       },
       success: function(res){
-        console.log(res);
         that.processDoubanData(res.data, settedKey, categoryTitle);
       },
       fail: function(){
@@ -39,7 +45,7 @@ Page({
     })
   },
 
-  processDoubanData: function (moviesDouban, settedKey, categoryTitle){
+  processDoubanData: function (moviesDouban, settedKey, categoryTitle){//将获取的数据，拆分成我们想要的成分，并且返回结果
     var movies = [];
     for(var idx in moviesDouban.subjects){
       var subject = moviesDouban.subjects[idx];

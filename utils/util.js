@@ -12,6 +12,23 @@ function convertToStarArray(stars){
   return array;
 }
 
+function http(url,callBack) {//获取api下的data数据(异步)
+  wx.request({
+    url: url,
+    method: 'GET',
+    header: {
+      "Content-Type": "application/xml"
+    },
+    success: function (res) {
+      callBack(res.data);
+    },
+    fail: function (error) {
+      console.log(error);
+    }
+  })
+}
+
 module.exports = {
-  convertToStarArray: convertToStarArray
+  convertToStarArray: convertToStarArray,
+  http: http
 }
