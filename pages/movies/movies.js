@@ -8,7 +8,9 @@ Page({
   data:{
     inTheaters:{},
     comingSoon:{},
-    top250:{}
+    top250:{},
+    containerShow: true,
+    searchPanelShow: false
   },
 
   onMoreTap: function(event){//"更多"跳转方法
@@ -42,6 +44,22 @@ Page({
       fail: function(){
         console.log("fail");
       }
+    })
+  },
+
+  //xx关闭搜索界面
+  onCancelImgTap: function(event){
+    this.setData({
+      containerShow: true,
+      searchPanelShow: false
+    })
+  },
+
+  //input绑定事件
+  onBindFocus: function(event){
+    this.setData({
+      containerShow: false,
+      searchPanelShow: true
     })
   },
 

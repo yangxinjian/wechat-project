@@ -37,6 +37,20 @@ Page({
   onScrollLower: function(event){//下拉加载更多20条数据
     var nextUrl = this.data.requestUrl + "?start=" + this.data.totalCount + "&count=20";
     util.http(nextUrl, this.processDoubanData);
+    //设置加载等待loading图标
+    wx.showNavigationBarLoading();
+  },
+  
+
+  //程序刷新自动跳动函数onPullDownRefresh
+  onPullDownRefresh: function (event) {
+    var refreshUrl = this.data.requestUrl +
+      "?star=0&count=20";
+    this.data.movies = {};
+    this.data.isEmpty = true;
+    this.data.totalCount = 0;
+    util.http(refreshUrl, this.processDoubanData);
+    wx.showNavigationBarLoading();
   },
 
   processDoubanData: function (moviesDouban){
@@ -68,6 +82,11 @@ Page({
       movies: totalMovies//绑定所有数据
     });
     this.data.totalCount += 20;//每次处理数据，都获取下20条数据
+
+    //加载数据完成后，加载图标消失。
+    wx.hideNavigationBarLoading();
+    //刷新数据完成后，刷新图标消失。
+    wx.stopPullDownRefresh();
   }
 
 })
