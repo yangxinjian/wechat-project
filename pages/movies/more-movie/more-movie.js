@@ -6,7 +6,10 @@ Page({
 
   data: {
     movies:{},
-    navigateTitle: ""
+    navigateTitle: "",
+    requestUrl: "",//定义变量通过一个函数的赋值，在另一个函数中调用
+    totalCount: 0,
+    isEmpty: true//指代当前数据是否为空
   },
 
   onLoad: function (options) {
@@ -27,11 +30,13 @@ Page({
         dataUrl = app.globalData.doubanBase + "/v2/movie/top250";
         break;
     }
+    this.data.requestUrl = dataUrl;
     util.http(dataUrl, this.processDoubanData);
   },
 
-  onScrollLower: function(event){
-   
+  onScrollLower: function(event){//下拉加载更多20条数据
+    var nextUrl = this.data.requestUrl + "?start=" + this.data.totalCount + "&count=20";
+    util.http(nextUrl, this.processDoubanData);
   },
 
   processDoubanData: function (moviesDouban){
@@ -52,10 +57,17 @@ Page({
       }
       movies.push(temp);
     }
-   
+    var totalMovies = {};
+    if(!this.data.isEmpty){//判断是否不是第一次加载数据
+      totalMovies = this.data.movies.concat(movies);//将之前的数据与后加载的20条数据结合在一起
+    }else{
+      totalMovies = movies;
+      this.data.isEmpty = false;
+    }
     this.setData({
-      movies: movies
+      movies: totalMovies//绑定所有数据
     });
+    this.data.totalCount += 20;//每次处理数据，都获取下20条数据
   }
 
 })
