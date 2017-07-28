@@ -2,7 +2,7 @@
 <import src="movie-grid/movie-grid-template.wxml" />
 <view class="search">
   <icon type="search" size="13" color="#405f80" class="search-img"/>
-  <input type="text" placeholder="我的前半生" placeholder-class="placeholeder" bindfocus="onBindFocus" bindchange="onBindChange"/>
+  <input type="text" placeholder="我的前半生" placeholder-class="placeholeder" bindfocus="onBindFocus" bindconfirm="onBindConfirm"/>
   <image src="/images/xx.png" wx:if="{{searchPanelShow}}" bindtap="onCancelImgTap" class="xx-img"></image>
 </view>
 <view class="container" wx:if="{{containerShow}}">
@@ -19,5 +19,5 @@
 
 <!-- 搜索之后显示的页面-->
 <view class="search-panel" wx:if="{{searchPanelShow}}">
-  <template is="movieGridTemplate"></template>
+  <template is="movieGridTemplate" data="{{...searchResult}}"></template>
 </view>

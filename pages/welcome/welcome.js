@@ -4,7 +4,7 @@ Page({
         //  url: '../posts/post'
        // });
 
-        wx.switchTab({
+        wx.switchTab({//只能跳转带tab的页面
           url: '../posts/post'
         })
     }

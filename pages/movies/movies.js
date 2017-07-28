@@ -9,6 +9,7 @@ Page({
     inTheaters:{},
     comingSoon:{},
     top250:{},
+    searchResult:{},
     containerShow: true,
     searchPanelShow: false
   },
@@ -17,6 +18,14 @@ Page({
     var category = event.currentTarget.dataset.category;//获取点击的“更多”，代表哪儿一个分类
     wx.navigateTo({//跳转子页面
       url: 'more-movie/more-movie?category=' + category,
+    })
+  },
+
+  //每个电影信息跳转详情页面
+  onMovieTap: function(event){
+    var movieId = event.currentTarget.dataset.movieid;
+    wx.navigateTo({
+      url: 'movie-detail/movie-detail?id=' + movieId 
     })
   },
 
@@ -51,8 +60,16 @@ Page({
   onCancelImgTap: function(event){
     this.setData({
       containerShow: true,
-      searchPanelShow: false
+      searchPanelShow: false,
+      searchResult:{}
     })
+  },
+
+  //搜索事件
+  onBindConfirm: function(event){
+    var text = event.detail.value;//获取用户输入的text值
+    var searchUrl = app.globalData.doubanBase + "/v2/movie/search?q=" + text;
+    this.getMovieListData(searchUrl , "searchResult" , "");
   },
 
   //input绑定事件
