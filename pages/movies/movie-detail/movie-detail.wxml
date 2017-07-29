@@ -1,7 +1,7 @@
 <import src="../stars/stars-template.wxml" />
 <view class="container">
   <image src="{{movie.movieImg}}" class="head-img" mode="aspectFill"/>
-  <view class="head-img-hover" >
+  <view class="head-img-hover" data-src="{{movie.movieImg}}" catchtap="viewMoviePostImg" >
     <text class="main-title">{{movie.title}}</text>
     <text class="sub-title">{{movie.country + "." + movie.year}}</text>
     <view class="like">
@@ -11,7 +11,7 @@
       <text class="plain-font">条评论</text>
     </view>
   </view>
-  <image class="movie-img" src="{{movie.movieImg}}" />
+  <image class="movie-img" src="{{movie.movieImg}}" data-src="{{movie.movieImg}}" catchtap="viewMoviePostImg"/>
   <view class="summary">
     <view class="original-title">
       <text>{{movie.originalTitle}}</text>
@@ -36,13 +36,13 @@
 
   <view class="hr"></view>
   <view class="synopsis">
-    <text>剧情简介</text>
+    <text class="synopsis-font">剧情简介</text>
     <text class="sunmmary-content">{{movie.summary}}</text>
   </view><!--梗概-->
   <view class="hr"></view>
 
   <view class="cast">
-    <text>影人</text>
+    <text class="cast-font">影人</text>
     <scroll-view class="cast-imgs" scroll-x="true" style="width: 100%">
       <block wx:for="{{movie.castsInfo}}" wx:for-item="item">
         <view class="cast-container">

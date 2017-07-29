@@ -87,6 +87,14 @@ Page({
     wx.hideNavigationBarLoading();
     //刷新数据完成后，刷新图标消失。
     wx.stopPullDownRefresh();
+  },
+
+  //设置更多页面电影信息点击单个电影跳转详细页面
+  onMovieTap: function(event){
+    var movieId = event.currentTarget.dataset.movieid;
+    wx.navigateTo({
+      url: '../movie-detail/movie-detail?id=' + movieId,
+    })
   }
 
 })
